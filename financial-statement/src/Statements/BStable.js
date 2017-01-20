@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
-import { fetchStatement, fetchBalanceSheet } from './actions';
+import { fetchStatement, fetchBalanceSheet, setBalanceSheetObj } from './actions';
 
 import {Table, TableBody, TableHeader, TableHeaderColumn, TableRow, TableRowColumn} from 'material-ui/Table';
 
@@ -39,51 +39,61 @@ class BStable extends Component {
       />,
     ];
 
-    let balanceSheetObj;
+    let balanceSheetObj;//captures the object with data from the API call
+    let arrayOfBalanceSheetItems = [];//pushes the each item in the object into this array
+
+    let content;//it will contain the table rows generated
+
     this.props.fetchBalanceSheet().then((data) =>
     {
       balanceSheetObj = data.payload.data[0]
-      console.log(balanceSheetObj)
-//need to figure out how to access the value of balanceSheetObj outside of this arrow function
+      return balanceSheetObj;
     })
     console.log(balanceSheetObj)
-    let arrayOfBalanceSheetItems = [];
     for (let key in balanceSheetObj){
       if(typeof balanceSheetObj === 'object'){
-        let item = {
-          name: [key],
-          value: balanceSheetObj[key]
+          let item = {
+            name: key,
+            value: balanceSheetObj[key]
+          }
+            arrayOfBalanceSheetItems.push(item)
         }
-        arrayOfBalanceSheetItems.push(item)
       }
-    }
-    console.log(arrayOfBalanceSheetItems);
-    let content;
+      console.log(arrayOfBalanceSheetItems);
 
-    if( typeof arrayOfBalanceSheetItems === 'object'){
+    if(typeof arrayOfBalanceSheetItems === "object"){
+
       content = arrayOfBalanceSheetItems.map((item, index) => (
         <TableRow key={`${item.name}-${index}`}>
           <TableRowColumn>
             <FlatButton
-                  label={item.name}
-                  onTouchTap={this.handleOpen}
-                />
-                <Dialog
-                  title={item.name}
-                  actions={actions}
-                  modal={true}
-                  open={this.state.open}
-                >
-                  Only actions can close this dialog.
-                </Dialog>
+              label={item.name}
+              onTouchTap={this.handleOpen}
+            />
+            <Dialog
+              title={item.name}
+              actions={actions}
+              modal={true}
+              open={this.state.open}
+            >
+              Only actions can close this dialog.
+            </Dialog>
           </TableRowColumn>
           <TableRowColumn>
               {item.value}
           </TableRowColumn>
-          </TableRow>
-            ));
+        </TableRow>
+      ));
     }
 
+
+
+
+
+
+
+
+    console.log(content)
     return(
       <div>
         <Table selectable={false}>
