@@ -11,6 +11,7 @@ import _ from 'lodash';
 
 class BStable extends Component {
 
+
   state = {
     open: false,
   };
@@ -23,8 +24,25 @@ class BStable extends Component {
     this.setState({open: false});
   };
 
-  render(){
+  componentWillMount() {
+    console.log(this.props.balanceSheetObj)
 
+    let balanceSheetObj;//captures the object with data from the API call
+    this.props.fetchBalanceSheet().then((data) => {
+      balanceSheetObj = data.payload.data[0]
+
+      this.props.fetchBalanceSheet();
+
+      this.props.setBalanceSheetObj(balanceSheetObj);
+        this.setState({
+          balanceSheetObj: balanceSheetObj
+        })
+
+    })
+      console.log(balanceSheetObj)
+  };
+
+  render(){
     const actions = [
       <FlatButton
         label="Cancel"
@@ -47,8 +65,8 @@ class BStable extends Component {
     this.props.fetchBalanceSheet().then((data) =>
     {
       balanceSheetObj = data.payload.data[0]
-      return balanceSheetObj;
-    })
+      console.log(balanceSheetObj)
+        })
     console.log(balanceSheetObj)
     for (let key in balanceSheetObj){
       if(typeof balanceSheetObj === 'object'){
@@ -59,7 +77,7 @@ class BStable extends Component {
             arrayOfBalanceSheetItems.push(item)
         }
       }
-      console.log(arrayOfBalanceSheetItems);
+      // console.log(arrayOfBalanceSheetItems);
 
     if(typeof arrayOfBalanceSheetItems === "object"){
 
@@ -93,7 +111,7 @@ class BStable extends Component {
 
 
 
-    console.log(content)
+    // console.log(content)
     return(
       <div>
         <Table selectable={false}>
@@ -116,19 +134,24 @@ class BStable extends Component {
           </Table>
       </div>
     )
+
+
   }
+
 }
 
 function mapStateToProp(store){
   return {
-    tenK: store.tenK
+    tenK: store.tenK,
+    balanceSheetObj: store.balanceSheetObj
   }
 }
 
 function mapDispatchToProps(dispatch){
   return bindActionCreators({
     fetchStatement: fetchStatement,
-    fetchBalanceSheet: fetchBalanceSheet
+    fetchBalanceSheet: fetchBalanceSheet,
+    setBalanceSheetObj: setBalanceSheetObj
   }, dispatch)
 }
 

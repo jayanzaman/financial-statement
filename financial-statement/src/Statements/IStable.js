@@ -29,13 +29,13 @@ class IStable extends Component {
 
   componentWillMount() {
 
-    console.log(this.props.ticker)
+    // console.log(this.props.ticker)
 
     // console.log(this.props.fetchStatement().payload[0].incomeStatement[0])
 
     const incStateLast = this.props.fetchStatement().payload[0].incomeStatement[0]
 
-    console.log(incStateLast)
+    // console.log(incStateLast)
 
     // for (let key in incStateLast){
     //   console.log(
@@ -124,7 +124,7 @@ class IStable extends Component {
       arrayOfTableItems.push(item)
      }
    }
-console.log(arrayOfTableItems);
+// console.log(arrayOfTableItems);
  let content;
 
 if (typeof arrayOfTableItems === "object"){
