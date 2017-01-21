@@ -5,6 +5,8 @@ import Axios from 'axios';
 
 export const SET_TICKER = 'SET_TICKER';
 
+export const SET_BALANCESHEET_TABLE = 'SET_BALANCESHEET_TABLE';
+
 export const SET_BALANCESHEET_OBJ = 'SET_BALANCESHEET_OBJ';
 
 export const FETCH_STATEMENT = "FETCH_STATEMENT";
@@ -29,6 +31,13 @@ export const setBalanceSheetObj = (balanceSheetObj) => {
   return {
     payload: balanceSheetObj,
     type: SET_BALANCESHEET_OBJ
+  }
+}
+
+export const setBalanceSheetTable = (balanceSheetTable) => {
+  return {
+    payload: balanceSheetTable,
+    type: SET_BALANCESHEET_TABLE
   }
 }
 

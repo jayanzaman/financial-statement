@@ -11,6 +11,11 @@ import FlatButton from 'material-ui/FlatButton';
 import Dialog from 'material-ui/Dialog';
 import _ from 'lodash';
 
+
+
+
+
+
 class IStable extends Component {
 
   state = {
@@ -86,7 +91,10 @@ class IStable extends Component {
         onTouchTap={this.handleClose}
       />,
     ];
-
+    Number.prototype.format = function(n, x) {
+    var re = '\\d(?=(\\d{' + (x || 3) + '})+' + (n > 0 ? '\\.' : '$') + ')';
+    return this.toFixed(Math.max(0, ~~n)).replace(new RegExp(re, 'g'), '$&,');
+};
 //     const incStateLast = this.props.fetchStatement().payload[0].incomeStatement[0]
 //         for (let key in incStateLast){
 //     return(
@@ -145,7 +153,7 @@ if (typeof arrayOfTableItems === "object"){
             </Dialog>
       </TableRowColumn>
       <TableRowColumn>
-          {item.value}
+          {item.value.format(2)}
       </TableRowColumn>
       </TableRow>
   ));
@@ -159,7 +167,7 @@ if (typeof arrayOfTableItems === "object"){
             displaySelectAll={false}
             adjustForCheckbox={false}
           >
-            <TableRow>
+            <TableRow >
                 <TableHeaderColumn>
                 In Millions of USD
                 </TableHeaderColumn>
@@ -168,7 +176,7 @@ if (typeof arrayOfTableItems === "object"){
                 </TableHeaderColumn>
               </TableRow>
             </TableHeader>
-            <TableBody displayRowCheckbox={false}>
+            <TableBody displayRowCheckbox={false} >
             { content }
             </TableBody>
         </Table>

@@ -7,11 +7,11 @@ import MuiThemeProvider from 'material-ui/styles/MuiThemeProvider';
 import styled from 'styled-components';
 import Paper from 'material-ui/Paper';
 import {Tabs, Tab} from 'material-ui/Tabs';
-
+import RaisedButton from 'material-ui/RaisedButton';
 
 import IStable from './IStable';
 import BStable from './BStable';
-import CFtable from './CFtable';
+
 
 
   const AppWrapper = styled.div`
@@ -60,23 +60,19 @@ class FinancialStatement extends Component {
       <AppWrapper>
         <form onSubmit={this.handleSubmit}>
           <label>
-              <span>Stock Ticker:</span>
-              <input type="text"  onChange={this.handleChange} />
+              <input style={{height: 33, display: 'inline-block', margin: 10, }} type="text" placeholder="Enter Stock Ticker Here" onChange={this.handleChange} />
           </label>
-              <input type="submit" value="Submit" />
+              <RaisedButton label="Submit" type="submit" value="Submit"/>
+
         </form>
-        <p>Financial Statement 10K</p>
-      <MuiThemeProvider>{/*this is required to use Material-UI*/}
+      <MuiThemeProvider >{/*this is required to use Material-UI*/}
         <Paper zDepth={2}>{/*Specifies the end of the table*/}
-          <Tabs>{/*Creates the tabs of IncomeStatement, Balance Sheet and CashFlows*/}
+          <Tabs style={{backgroundColor: '42A5F5'}}>{/*Creates the tabs of IncomeStatement, Balance Sheet and CashFlows*/}
             <Tab label="Income Statement" >{/*First of Three tabs*/}
               <IStable />
             </Tab>
             <Tab label="Balance Sheet" >{/*Second of Three tabs*/}
               <BStable />
-            </Tab>
-            <Tab label="Cash Flow" >{/*Third of Three tabs*/}
-              <CFtable />
             </Tab>
           </Tabs>
         </Paper>

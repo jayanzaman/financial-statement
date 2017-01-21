@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
-import { fetchStatement, fetchBalanceSheet, setBalanceSheetObj } from './actions';
+import { fetchStatement, fetchBalanceSheet, setBalanceSheetObj, setBalanceSheetTable } from './actions';
 
 import {Table, TableBody, TableHeader, TableHeaderColumn, TableRow, TableRowColumn} from 'material-ui/Table';
 
@@ -10,11 +10,14 @@ import Dialog from 'material-ui/Dialog';
 import _ from 'lodash';
 
 class BStable extends Component {
+  constructor(props){
+    super(props)
+    this.state = {
+      balanceSheetTable: props.balanceSheetTable,
+      open: false
+    }
 
-
-  state = {
-    open: false,
-  };
+  }
 
   handleOpen = () => {
     this.setState({open: true});
@@ -24,25 +27,7 @@ class BStable extends Component {
     this.setState({open: false});
   };
 
-  componentWillMount() {
-    console.log(this.props.balanceSheetObj)
-
-    let balanceSheetObj;//captures the object with data from the API call
-    this.props.fetchBalanceSheet().then((data) => {
-      balanceSheetObj = data.payload.data[0]
-
-      this.props.fetchBalanceSheet();
-
-      this.props.setBalanceSheetObj(balanceSheetObj);
-        this.setState({
-          balanceSheetObj: balanceSheetObj
-        })
-
-    })
-      console.log(balanceSheetObj)
-  };
-
-  render(){
+  componentDidMount() {
     const actions = [
       <FlatButton
         label="Cancel"
@@ -57,17 +42,18 @@ class BStable extends Component {
       />,
     ];
 
+    console.log(this.props.balanceSheetObj)
+
     let balanceSheetObj;//captures the object with data from the API call
-    let arrayOfBalanceSheetItems = [];//pushes the each item in the object into this array
-
-    let content;//it will contain the table rows generated
-
-    this.props.fetchBalanceSheet().then((data) =>
-    {
+    this.props.fetchBalanceSheet().then((data) => {
       balanceSheetObj = data.payload.data[0]
-      console.log(balanceSheetObj)
+
+      this.props.setBalanceSheetObj(balanceSheetObj);
+        this.setState({
+          balanceSheetObj: balanceSheetObj
         })
-    console.log(balanceSheetObj)
+        console.log(this.props.balanceSheetObj)
+    let arrayOfBalanceSheetItems = [];//pushes the each item in the object into this array
     for (let key in balanceSheetObj){
       if(typeof balanceSheetObj === 'object'){
           let item = {
@@ -77,8 +63,8 @@ class BStable extends Component {
             arrayOfBalanceSheetItems.push(item)
         }
       }
-      // console.log(arrayOfBalanceSheetItems);
-
+      console.log(arrayOfBalanceSheetItems);
+ let content;//it will contain the table rows generated
     if(typeof arrayOfBalanceSheetItems === "object"){
 
       content = arrayOfBalanceSheetItems.map((item, index) => (
@@ -103,15 +89,24 @@ class BStable extends Component {
         </TableRow>
       ));
     }
+    setBalanceSheetTable(content)
+    console.log(content)
+    this.setState({
+      balanceSheetTable: content
+    })
+    console.log(this.props.balanceSheetTable)
+
+    })
+
+  };
+
+shouldComponentUpdate(prevProps, nextProps){
+  return true
+}
 
 
-
-
-
-
-
-
-    // console.log(content)
+  render(){
+    console.log(this.props.balanceSheetTable)
     return(
       <div>
         <Table selectable={false}>
@@ -129,7 +124,7 @@ class BStable extends Component {
               </TableRow>
             </TableHeader>
             <TableBody displayRowCheckbox={false}>
-            { content }
+ {/* { content }*/}
             </TableBody>
           </Table>
       </div>
@@ -143,7 +138,8 @@ class BStable extends Component {
 function mapStateToProp(store){
   return {
     tenK: store.tenK,
-    balanceSheetObj: store.balanceSheetObj
+    balanceSheetObj: store.balanceSheetObj,
+    balanceSheetTable: store.balanceSheetTable
   }
 }
 
