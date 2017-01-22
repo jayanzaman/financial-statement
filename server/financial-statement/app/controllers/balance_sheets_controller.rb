@@ -12,7 +12,7 @@ class BalanceSheetsController < ApplicationController
   def show
 
     ### example
-    # get_new_stuff(id)\
+    p get_new_stuff
     # this method is located in the application controller
     ## end example
     render json: @balance_sheet

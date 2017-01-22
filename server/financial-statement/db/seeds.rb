@@ -38,6 +38,6 @@ BalanceSheet.create({
   CommonStocksIncludingAdditionalPaidInCapital: 31251.0,
   RetainedEarningsAccumulatedDeficit: 96364000000.0,
   AccumulatedOtherComprehensiveIncomeLossNetOfTax: 634000000.0,
-  StockholdersEquity: 128249000000.0
+  StockholdersEquity: 128249000000.0,
   LiabilitiesAndStockholdersEquity: 321686000000.0
   })

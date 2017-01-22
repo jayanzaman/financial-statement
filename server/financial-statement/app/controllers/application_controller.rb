@@ -21,8 +21,5 @@ def cors_set_access_control_headers
   end
 
 
-  private
-  # def get_new_stuff do |id|
-  #   HTTParty.get(somethig)
-  # end
+
 end
