@@ -39,7 +39,7 @@ class FinancialStatement extends Component {
   }
 
   handleSubmit(event) {
-    alert('A name was submitted: ' + this.props.ticker);
+    alert('The stock ticker submitted is ' + this.props.ticker);
     event.preventDefault();
 
   }
@@ -48,11 +48,8 @@ class FinancialStatement extends Component {
 
   componentWillMount() {
     this.props.fetchStatement(this.props.tenK)
+    console.log(this.props.ticker)
   }
-
-
-
-
 
   render(){
 

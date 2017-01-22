@@ -22,8 +22,6 @@ class IStable extends Component {
     open: false,
   };
 
-
-
   handleOpen = () => {
     this.setState({open: true});
   };
@@ -32,49 +30,6 @@ class IStable extends Component {
     this.setState({open: false});
   };
 
-  componentWillMount() {
-
-    // console.log(this.props.ticker)
-
-    // console.log(this.props.fetchStatement().payload[0].incomeStatement[0])
-
-    const incStateLast = this.props.fetchStatement().payload[0].incomeStatement[0]
-
-    // console.log(incStateLast)
-
-    // for (let key in incStateLast){
-    //   console.log(
-    //     <TableRow>
-    //       <TableRowColumn>
-    //         <FlatButton
-    //           label={key}
-    //           onTouchTap={this.handleOpen}
-    //         />
-    //         <Dialog
-    //           title={key}
-
-    //           modal={true}
-    //           open={this.state.open}
-    //         >
-    //           Only actions can close this dialog.
-    //         </Dialog>
-    //       </TableRowColumn>
-    //       <TableRowColumn>
-    //       {incStateLast[key]}
-    //       </TableRowColumn>
-    //     </TableRow>
-        // )
-    // }
-
-    // this.props.fetchStatement
-
-    //need to set up backend to save the data
-  //   this.props.fetchIncomeStatement().then((data) => {
-  //     var response = data.payload.data
-  //       var balanceSheet = response.Data
-  //     console.log(response.Data)
-  //   })
-  };
 
   render(){
 
@@ -91,35 +46,13 @@ class IStable extends Component {
         onTouchTap={this.handleClose}
       />,
     ];
+
+    console.log(this.props.ticker)
     Number.prototype.format = function(n, x) {
     var re = '\\d(?=(\\d{' + (x || 3) + '})+' + (n > 0 ? '\\.' : '$') + ')';
     return this.toFixed(Math.max(0, ~~n)).replace(new RegExp(re, 'g'), '$&,');
 };
-//     const incStateLast = this.props.fetchStatement().payload[0].incomeStatement[0]
-//         for (let key in incStateLast){
-//     return(
-//         <TableRow>
-//           <TableRowColumn>
-//             <FlatButton
-//               label={key}
-//               onTouchTap={this.handleOpen}
-//             />
-//             <Dialog
-//               title={key}
 
-//               modal={true}
-//               open={this.state.open}
-//             >
-//               Only actions can close this dialog.
-//             </Dialog>
-//           </TableRowColumn>
-//           <TableRowColumn>
-//           {incStateLast[key]}
-//           </TableRowColumn>
-//         </TableRow>
-//         )
-//   }
-// }
 
  const incStateLast = this.props.fetchStatement().payload[0].incomeStatement[0]
 
@@ -132,7 +65,6 @@ class IStable extends Component {
       arrayOfTableItems.push(item)
      }
    }
-// console.log(arrayOfTableItems);
  let content;
 
 if (typeof arrayOfTableItems === "object"){
@@ -148,9 +80,8 @@ if (typeof arrayOfTableItems === "object"){
               actions={actions}
               modal={true}
               open={this.state.open}
-            >
-              Only actions can close this dialog.
-            </Dialog>
+            />
+
       </TableRowColumn>
       <TableRowColumn>
           {item.value.format(2)}

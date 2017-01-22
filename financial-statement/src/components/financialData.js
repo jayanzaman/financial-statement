@@ -1,18 +1,16 @@
 const financialData = [{
   company: "Apple Inc.",
   incomeStatement: [{
-      year: 2016,
       revenue: 215639,
-      costOfRevenue: 131376,
-      operatingExpense: 155615,
-      otherNet: -1195,
-      netIncome: 45687,
-      totalShares: 5500.28,
-      EPS: 8.31,
-      dividendsPerShare: 2.18
+      cost_Of_Revenue: 131376,
+      operating_Expense: 155615,
+      other_Net: -1195,
+      net_Income: 45687,
+      total_Shares: 5500.28,
+      Earnings_Per_Share: 8.31,
+      dividends_Per_Share: 2.18
     },
     {
-      year: 2015,
       revenue: 233715,
       costOfRevenue: 140089,
       operatingExpense: 162485,

@@ -9,14 +9,13 @@ import FlatButton from 'material-ui/FlatButton';
 import Dialog from 'material-ui/Dialog';
 import _ from 'lodash';
 
-class BStable extends Component {
+class TableRowList extends Component {
   constructor(props){
     super(props)
     this.state = {
       balanceSheetTable: [],
       open: false
     }
-
   }
 
   handleOpen = () => {
@@ -27,9 +26,6 @@ class BStable extends Component {
     this.setState({open: false});
   };
 
-  componentWillMount(){
-        console.log(this.props.ticker)
-  }
 
   componentDidMount() {
 
@@ -74,47 +70,21 @@ class BStable extends Component {
           </TableRowColumn>
         </TableRow>
       ));
-    setBalanceSheetTable(content)
-    console.log(content)
-    this.setState({
-      balanceSheetTable: content
-    })
-  }
-
-
+        setBalanceSheetTable(content)
+        console.log(content)
+        this.setState({
+          balanceSheetTable: content
+        })
+      }
     })//end of promise function
 
   };
-
-shouldComponentUpdate(prevProps, nextProps){
-  return true
-}
-
 
   render(){
 
     console.log(this.props.ticker)
     return(
-      <div>
-        <Table selectable={false}>
-          <TableHeader
-            displaySelectAll={false}
-            adjustForCheckbox={false}
-          >
-            <TableRow>
-                <TableHeaderColumn>
-                In Millions of USD
-                </TableHeaderColumn>
-                <TableHeaderColumn>
-                2016
-                </TableHeaderColumn>
-              </TableRow>
-            </TableHeader>
-            <TableBody displayRowCheckbox={false}>
-            { this.state.balanceSheetTable }
-            </TableBody>
-          </Table>
-      </div>
+      { this.state.balanceSheetTable }
     )
   }
 
@@ -138,5 +108,5 @@ function mapDispatchToProps(dispatch){
   }, dispatch)
 }
 
-export default connect(mapStateToProp, mapDispatchToProps)(BStable)
+export default connect(mapStateToProp, mapDispatchToProps)(TableRowList)
 
