@@ -19,6 +19,25 @@ export const FETCH_INCOMESTATEMENT = "FETCH_INCOMESTATEMENT";
 
 export const FETCH_CASHFLOW = "FETCH_CASHFLOW";
 
+export const FETCH_TABLE = "FETCH_TABLE";
+
+export function fetchTable() {
+
+    const request = Axios({
+      method: 'get',
+      url: 'https://services.last10k.com/v1/company/aapl/balancesheet?formType=10-K&filingOrder=1 HTTP/1.1',
+      headers: {
+  'Ocp-Apim-Subscription-Key': '3f7bb0c470e24b14b2f034b5fe522159'
+},
+      responseType: 'json'
+    });
+
+  return {
+    type: FETCH_TABLE,
+    payload: request
+  }
+
+}
 
 export const setTicker = (ticker) => {
   return {

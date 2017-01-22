@@ -11,7 +11,7 @@ import RaisedButton from 'material-ui/RaisedButton';
 
 import IStable from './IStable';
 import BStable from './BStable';
-
+import BalanceSheetTable from './BalanceSheetTable';
 
 
   const AppWrapper = styled.div`
@@ -70,6 +70,9 @@ class FinancialStatement extends Component {
             </Tab>
             <Tab label="Balance Sheet" >{/*Second of Three tabs*/}
               <BStable />
+            </Tab>
+            <Tab label="Table" >{/*Second of Three tabs*/}
+              <BalanceSheetTable />
             </Tab>
           </Tabs>
         </Paper>
