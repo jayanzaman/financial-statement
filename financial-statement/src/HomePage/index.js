@@ -15,7 +15,7 @@ class HomePage extends Component {
       <MuiThemeProvider>
       <div>
         <AppBar
-
+          style={{backgroundColor: 'rgb(102,0,0'}}
           title="Financial Statement"
           iconClassNameRight="muidocs-icon-navigation-expand-more"
         />

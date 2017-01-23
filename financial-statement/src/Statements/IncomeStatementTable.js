@@ -15,9 +15,9 @@ class IncomeStatementTable extends Component {
         console.log(this.props.ticker)
   }
 
-  componentDidMount() {
+  componentWillUpdate() {
     console.log(this.props.ticker)
-    this.props.fetchIncomeStatementTable('aapl','income').then((data) => {
+    this.props.fetchIncomeStatementTable(this.props.ticker,'income').then((data) => {
      const content = data.payload.data.Content
       const IncomeStatementTable = content
       this.setState({
@@ -26,9 +26,9 @@ class IncomeStatementTable extends Component {
     })
   }
 
- // shouldComponentUpdate(nextProps, nextState){
- //    return this.props.shouldComponentUpdate
- //  }
+ shouldComponentUpdate(){
+    return this.props.shouldComponentUpdate
+  }
 
   render(){
 
@@ -42,7 +42,8 @@ class IncomeStatementTable extends Component {
 function mapStateToProp(store){
   return {
     IncomeStatementTable: store.IncomeStatementTable,
-    ticker: store.ticker
+    ticker: store.ticker,
+    shouldComponentUpdate: store.shouldComponentUpdate
   }
 }
 

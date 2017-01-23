@@ -33,15 +33,16 @@ class FinancialStatement extends Component {
 
   handleChange(event) {
     this.props.setTicker((event.target.value));
+    this.props.should_Component_Update(true)
 
   }
 
   handleSubmit(event) {
-    alert('The stock ticker submitted is ' + this.props.ticker);
+    this.props.should_Component_Update(true)
     event.preventDefault();
     console.log(this.props.ticker)
     this.props.setTicker(this.props.ticker)
-    this.props.should_Component_Update(true)
+
     console.log(this.props.shouldComponentUpdate)
   }
 
@@ -61,13 +62,13 @@ class FinancialStatement extends Component {
               <RaisedButton label="Submit" type="submit" value="Submit"/>
 
         </form>
-      <MuiThemeProvider >{/*this is required to use Material-UI*/}
+      <MuiThemeProvider  >{/*this is required to use Material-UI*/}
         <Paper zDepth={2}>{/*Specifies the end of the table*/}
-          <Tabs style={{backgroundColor: '42A5F5'}}>{/*Creates the tabs of IncomeStatement, Balance Sheet and CashFlows*/}
-            <Tab label="Balance Sheet" >{/*Second of Three tabs*/}
+          <Tabs >{/*Creates the tabs of IncomeStatement, Balance Sheet and CashFlows*/}
+            <Tab style={{backgroundColor: 'rgb(102,0,0'}} label="Balance Sheet" >{/*Second of Three tabs*/}
               <BalanceSheetTable />
             </Tab>
-            <Tab label="Income Statement" >
+            <Tab style={{backgroundColor: 'rgb(102,0,0'}} label="Income Statement" >
               <IncomeStatementTable />
             </Tab>
 

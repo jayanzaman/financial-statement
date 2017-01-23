@@ -15,9 +15,9 @@ class BalanceSheetTable extends Component {
         console.log(this.props.ticker)
   }
 
-  componentWillMount() {
+  componentWillUpdate() {
     console.log(this.props.ticker)
-    this.props.fetchBalanceSheet_Table('aapl','balancesheet').then((data) => {
+    this.props.fetchBalanceSheet_Table(this.props.ticker,'balancesheet').then((data) => {
      const content = data.payload.data.Content
       const balanceSheetTable = content
       this.setState({
