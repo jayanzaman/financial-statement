@@ -1,7 +1,7 @@
 import { SET_TICKER } from './actions';
 // import * as actions from './action';
 
-export default function(state = {}, action) {
+export default function(state = '', action) {
 
   switch(action.type){
 

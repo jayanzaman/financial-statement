@@ -1,12 +1,12 @@
 import { combineReducers } from 'redux';
-import StatementReducer from '../Statements/statement_reducer';
+
 import TickerReducer from '../Statements/ticker_reducer';
-import BalanceSheetObjReducer from '../Statements/balanceSheetObj_reducer';
+import BalanceSheetTableReducer from '../Statements/balanceSheetTable_reducer'
+import shouldComponentUpdateReducer from '../Statements/shouldComponentUpdate_reducer'
 
 const rootReducer = combineReducers({
-  statement: StatementReducer,
   ticker: TickerReducer,
-  balanceSheetObj: BalanceSheetObjReducer
+  shouldComponentUpdate: shouldComponentUpdateReducer
 });
 
 export default rootReducer;

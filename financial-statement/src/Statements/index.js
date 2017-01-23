@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
-import { fetchStatement, setTicker } from './actions';
+import { setTicker, should_Component_Update } from './actions';
 
 import MuiThemeProvider from 'material-ui/styles/MuiThemeProvider';
 import styled from 'styled-components';
@@ -9,9 +9,9 @@ import Paper from 'material-ui/Paper';
 import {Tabs, Tab} from 'material-ui/Tabs';
 import RaisedButton from 'material-ui/RaisedButton';
 
-import IStable from './IStable';
-import BStable from './BStable';
 import BalanceSheetTable from './BalanceSheetTable';
+import IncomeStatementTable from './IncomeStatementTable';
+
 
 
   const AppWrapper = styled.div`
@@ -27,37 +27,36 @@ class FinancialStatement extends Component {
 
   constructor(props) {
     super(props);
-    // this.state = {ticker: ''};
-
     this.handleChange = this.handleChange.bind(this);
     this.handleSubmit = this.handleSubmit.bind(this);
   }
 
   handleChange(event) {
     this.props.setTicker((event.target.value));
-    console.log(this.props.ticker)
+
   }
 
   handleSubmit(event) {
     alert('The stock ticker submitted is ' + this.props.ticker);
     event.preventDefault();
-
-  }
-
-
-
-  componentWillMount() {
-    this.props.fetchStatement(this.props.tenK)
     console.log(this.props.ticker)
+    this.props.setTicker(this.props.ticker)
+    this.props.should_Component_Update(true)
+    console.log(this.props.shouldComponentUpdate)
   }
 
+  // shouldComponentUpdate(){
+
+  //   return this.props.shouldComponentUpdate
+  // }
   render(){
 
     return(
       <AppWrapper>
+
         <form onSubmit={this.handleSubmit}>
           <label>
-              <input style={{height: 33, display: 'inline-block', margin: 10, }} type="text" placeholder="Enter Stock Ticker Here" onChange={this.handleChange} />
+              <input style={{height: 33, display: 'inline-block', margin: 10, }} type="text" onChange={this.handleChange} placeholder={"Enter Stock Ticker Here"}/>
           </label>
               <RaisedButton label="Submit" type="submit" value="Submit"/>
 
@@ -65,15 +64,13 @@ class FinancialStatement extends Component {
       <MuiThemeProvider >{/*this is required to use Material-UI*/}
         <Paper zDepth={2}>{/*Specifies the end of the table*/}
           <Tabs style={{backgroundColor: '42A5F5'}}>{/*Creates the tabs of IncomeStatement, Balance Sheet and CashFlows*/}
-            <Tab label="Income Statement" >{/*First of Three tabs*/}
-              <IStable />
-            </Tab>
             <Tab label="Balance Sheet" >{/*Second of Three tabs*/}
-              <BStable />
-            </Tab>
-            <Tab label="Table" >{/*Second of Three tabs*/}
               <BalanceSheetTable />
             </Tab>
+            <Tab label="Income Statement" >
+              <IncomeStatementTable />
+            </Tab>
+
           </Tabs>
         </Paper>
       </MuiThemeProvider>
@@ -85,14 +82,15 @@ class FinancialStatement extends Component {
 function mapStateToProps(store){
   return {
     tenK: store.tenK,
-    ticker: store.ticker
+    ticker: store.ticker,
+    shouldComponentUpdate: store.shouldComponentUpdate
   }
 }
 
 function mapDispatchToProps(dispatch){
   return bindActionCreators({
-    fetchStatement: fetchStatement,
-    setTicker: setTicker
+    setTicker: setTicker,
+    should_Component_Update: should_Component_Update
   }, dispatch)
 }
 

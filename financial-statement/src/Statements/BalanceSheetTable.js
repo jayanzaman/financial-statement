@@ -1,8 +1,8 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
-import { fetchTable } from './actions';
-var HtmlToReactParser = require('html-to-react').Parser;
+import { fetchBalanceSheet_Table, should_Component_Update } from './actions';
+
 
 class BalanceSheetTable extends Component {
   constructor(props){
@@ -15,9 +15,9 @@ class BalanceSheetTable extends Component {
         console.log(this.props.ticker)
   }
 
-  componentDidMount() {
-
-    this.props.fetchTable().then((data) => {
+  componentWillMount() {
+    console.log(this.props.ticker)
+    this.props.fetchBalanceSheet_Table('aapl','balancesheet').then((data) => {
      const content = data.payload.data.Content
       const balanceSheetTable = content
       this.setState({
@@ -26,8 +26,14 @@ class BalanceSheetTable extends Component {
     })
   }
 
+ shouldComponentUpdate(){
+    return this.props.shouldComponentUpdate
+  }
+
   render(){
-    console.log(this.state.balanceSheetTable)
+
+    console.log(this.props.ticker)
+    console.log(this.props.shouldComponentUpdate)
     return(
       <div dangerouslySetInnerHTML={{__html: this.state.balanceSheetTable}} />
     )
@@ -38,13 +44,15 @@ class BalanceSheetTable extends Component {
 function mapStateToProp(store){
   return {
     balanceSheetTable: store.balanceSheetTable,
-    ticker: store.ticker
+    ticker: store.ticker,
+    shouldComponentUpdate: store.shouldComponentUpdate
   }
 }
 
 function mapDispatchToProps(dispatch){
   return bindActionCreators({
-    fetchTable: fetchTable
+    fetchBalanceSheet_Table: fetchBalanceSheet_Table,
+    should_Component_Update: should_Component_Update
 
   }, dispatch)
 }

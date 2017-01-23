@@ -3,6 +3,7 @@ import FinancialStatement from '../Statements/index';
 import AppBar from 'material-ui/AppBar';
 import MuiThemeProvider from 'material-ui/styles/MuiThemeProvider';
 
+
 class HomePage extends Component {
 
 
@@ -18,12 +19,10 @@ class HomePage extends Component {
           title="Financial Statement"
           iconClassNameRight="muidocs-icon-navigation-expand-more"
         />
+
         <FinancialStatement />
         <br />
-        <AppBar
 
-          showMenuIconButton={false}
-        />
       </div>
       </MuiThemeProvider>
     );
