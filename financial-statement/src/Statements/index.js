@@ -29,10 +29,13 @@ class FinancialStatement extends Component {
     super(props);
     this.handleChange = this.handleChange.bind(this);
     this.handleSubmit = this.handleSubmit.bind(this);
+    this.state = {ticker: ''};
   }
 
   handleChange(event) {
-    this.props.setTicker((event.target.value));
+    this.setState({ticker: event.target.value});
+    console.log(this.state.ticker)
+    // this.props.setTicker((event.target.value));
     this.props.should_Component_Update(true)
 
   }
@@ -41,15 +44,16 @@ class FinancialStatement extends Component {
     this.props.should_Component_Update(true)
     event.preventDefault();
     console.log(this.props.ticker)
-    this.props.setTicker(this.props.ticker)
+    console.log(this.state.ticker)
+    this.props.setTicker(this.state.ticker)
 
     console.log(this.props.shouldComponentUpdate)
   }
 
-  // shouldComponentUpdate(){
-
-  //   return this.props.shouldComponentUpdate
-  // }
+  shouldComponentUpdate(){
+    console.log(this.props.shouldComponentUpdate)
+    return this.props.shouldComponentUpdate
+  }
   render(){
 
     return(

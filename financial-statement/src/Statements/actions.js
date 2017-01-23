@@ -29,7 +29,7 @@ export function fetchBalanceSheet_Table(ticker,balancesheet) {
       method: 'get',
       url: `https://services.last10k.com/v1/company/${ticker}/${balancesheet}?formType=10-K&filingOrder=1 HTTP/1.1`,
       headers: {
-  'Ocp-Apim-Subscription-Key': '7e0b2a03bd064b3885b7c193f0eaccec'
+  'Ocp-Apim-Subscription-Key': '3f7bb0c470e24b14b2f034b5fe522159'
 },
       responseType: 'json'
     });
@@ -48,7 +48,7 @@ export function fetchIncomeStatementTable(ticker,income) {
       method: 'get',
       url: `https://services.last10k.com/v1/company/${ticker}/${income}?formType=10-K&filingOrder=1 HTTP/1.1`,
       headers: {
-  'Ocp-Apim-Subscription-Key': '7e0b2a03bd064b3885b7c193f0eaccec'
+  'Ocp-Apim-Subscription-Key': '3f7bb0c470e24b14b2f034b5fe522159'
 },
       responseType: 'json'
     });
